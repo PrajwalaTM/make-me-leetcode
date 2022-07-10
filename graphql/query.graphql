@@ -1,0 +1,6 @@
+query QuestionOfToday{
+	
+	activeDailyCodingChallengeQuestion {
+		link
+	}
+} 

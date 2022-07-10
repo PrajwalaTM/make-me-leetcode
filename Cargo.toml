@@ -1,0 +1,20 @@
+[package]
+name = "make-me-leetcode"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# This is going to perform most of the graphql legwork for us
+graphql_client = "0.11.0"
+# These three below are for json serialization and deserialization
+serde = "1.0.114"
+serde_derive = "1.0.114"
+serde_json = "1.0.56"
+# For making http requests
+reqwest = {version = "0.11.0", features = ["json"]}
+# This one enables us to use async operations
+tokio = {version = "1.1.1", features = ["full"]}
+# Error handling crate
+anyhow = "1.0.39"
