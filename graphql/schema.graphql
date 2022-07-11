@@ -1,5 +1,5 @@
 schema {
-	query: Query
+  query: Query
 }
 
 type Query {
@@ -7,6 +7,6 @@ type Query {
 }
 
 type ActiveDailyCodingChallengeQuestion {
-	link: String!
+  link: String!
 }
 

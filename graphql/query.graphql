@@ -1,6 +1,5 @@
-query QuestionOfToday{
-	
-	activeDailyCodingChallengeQuestion {
-		link
-	}
+query QuestionOfToday{	
+  activeDailyCodingChallengeQuestion {
+    link
+  }
 } 
