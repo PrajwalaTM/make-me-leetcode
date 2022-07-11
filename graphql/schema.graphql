@@ -3,10 +3,22 @@ schema {
 }
 
 type Query {
-  activeDailyCodingChallengeQuestion: ActiveDailyCodingChallengeQuestion!   
+  activeDailyCodingChallengeQuestion: ActiveDailyCodingChallengeQuestion!  
+  randomQuestion(categorySlug: String!, filters: QuestionListFilterInput): RandomQuestion!
 }
 
 type ActiveDailyCodingChallengeQuestion {
   link: String!
 }
+
+input QuestionListFilterInput {
+  difficulty: String!,
+}
+
+type RandomQuestion {
+  titleSlug: String!,
+  title: String!,
+}
+
+
 

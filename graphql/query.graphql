@@ -1,5 +1,13 @@
-query QuestionOfToday{	
+query QuestionOfToday {	
   activeDailyCodingChallengeQuestion {
     link
   }
-} 
+}
+
+
+query RandomQuestion($categorySlug: String!, $filters: QuestionListFilterInput!) {
+    randomQuestion(categorySlug: $categorySlug, filters: $filters) {
+       titleSlug
+       title
+    }
+}

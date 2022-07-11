@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 # This is going to perform most of the graphql legwork for us
-graphql_client = "0.11.0"
+graphql_client = {version = "0.11.0", features = ["reqwest"]}
 # These three below are for json serialization and deserialization
 serde = "1.0.114"
 serde_derive = "1.0.114"
@@ -18,3 +18,4 @@ reqwest = {version = "0.11.0", features = ["json"]}
 tokio = {version = "1.1.1", features = ["full"]}
 # Error handling crate
 anyhow = "1.0.39"
+clap = { version = "3.2.8", features = ["derive"]}
