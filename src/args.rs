@@ -27,8 +27,6 @@ impl FromStr for Difficulty {
 #[derive(Parser)]
 #[clap(author, version, about, long_about = None)]
 pub struct Args {
-    #[clap(short, long, value_parser, default_value = "")]
-    pub companies: String,
     #[clap(short, long, value_parser, default_value = "EASY")]
     pub difficulty: String,
 }

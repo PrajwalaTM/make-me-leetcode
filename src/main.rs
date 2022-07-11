@@ -48,6 +48,7 @@ async fn make_post_query<T: GraphQLQuery>(
 async fn main() -> AnyhowResult<(), Error> {
     //Read and validate command line args
     let args = args::Args::parse();
+
     let _difficulty = args::Difficulty::from_str(&args.difficulty)?;
 
     let variables = question_of_today::Variables;
@@ -66,6 +67,7 @@ async fn main() -> AnyhowResult<(), Error> {
             difficulty: args.difficulty,
         },
     };
+
     let random_question = make_post_query::<RandomQuestion>(variables_random)
         .await?
         .data
