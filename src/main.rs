@@ -29,10 +29,10 @@ const LEETCODE_GRAPHQL_ENDPOINT: &str = "https://leetcode.com/graphql";
 const LEETCODE_BASE_URL: &str = "https://leetcode.com";
 const LEETCODE_PROBLEMS_PREFIX: &str = "/problems/";
 
-async fn get_question_of_today(
-    variables: question_of_today::Variables,
-) -> Result<Response<question_of_today::ResponseData>, Error> {
-    let request_body = QuestionOfToday::build_query(variables);
+async fn make_post_query<T: GraphQLQuery>(
+    variables: T::Variables,
+) -> Result<Response<T::ResponseData>, Error> {
+    let request_body = T::build_query(variables);
     let client = reqwest::Client::new();
     let res = client
         .post(LEETCODE_GRAPHQL_ENDPOINT)
@@ -40,21 +40,7 @@ async fn get_question_of_today(
         .send()
         .await?;
 
-    let response_body: Response<question_of_today::ResponseData> = res.json().await?;
-    Ok(response_body)
-}
-
-async fn get_random_question(
-    variables: random_question::Variables,
-) -> Result<Response<random_question::ResponseData>, Error> {
-    let request_body = RandomQuestion::build_query(variables);
-    let client = reqwest::Client::new();
-    let res = client
-        .post(LEETCODE_GRAPHQL_ENDPOINT)
-        .json(&request_body)
-        .send()
-        .await?;
-    let response_body: Response<random_question::ResponseData> = res.json().await?;
+    let response_body: Response<T::ResponseData> = res.json().await?;
     Ok(response_body)
 }
 
@@ -65,10 +51,10 @@ async fn main() -> AnyhowResult<(), Error> {
     let _difficulty = args::Difficulty::from_str(&args.difficulty)?;
 
     let variables = question_of_today::Variables;
-    let question_of_today = get_question_of_today(variables)
+    let question_of_today = make_post_query::<QuestionOfToday>(variables)
         .await?
         .data
-        .ok_or(anyhow!("Query failed"))?
+        .ok_or(anyhow!("Question of Today query failed"))?
         .active_daily_coding_challenge_question
         .link;
     let question_of_today_uri = format!("{}{}", LEETCODE_BASE_URL, question_of_today);
@@ -80,7 +66,7 @@ async fn main() -> AnyhowResult<(), Error> {
             difficulty: args.difficulty,
         },
     };
-    let random_question = get_random_question(variables_random)
+    let random_question = make_post_query::<RandomQuestion>(variables_random)
         .await?
         .data
         .ok_or(anyhow!("Random question query failed"))?
