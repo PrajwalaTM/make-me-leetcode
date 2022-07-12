@@ -19,3 +19,4 @@ tokio = {version = "1.1.1", features = ["full"]}
 # Error handling crate
 anyhow = "1.0.39"
 clap = { version = "3.2.8", features = ["derive"]}
+serenity = "0.11.2"
