@@ -1,3 +1,5 @@
+#!/usr/bin/env rustx
+
 use crate::random_question::QuestionListFilterInput;
 use anyhow::anyhow;
 use anyhow::Result as AnyhowResult;
@@ -83,7 +85,8 @@ async fn fetch_and_post_random_question(difficulty: String) -> AnyhowResult<()> 
 
 async fn post_to_discord(message: &str) {
     //Read discord webhook url
-    let discord_webhook_url = env::var(DISCORD_WEBHOOK_URL).unwrap();
+    let discord_webhook_url =
+        env::var(DISCORD_WEBHOOK_URL).expect(&format!("{} is not set", DISCORD_WEBHOOK_URL));
     let token = discord_webhook_url.split("/").last().unwrap();
 
     let http = Http::new(token);
